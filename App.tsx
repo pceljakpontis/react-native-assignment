@@ -2,8 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import BreedList from './src/presentation/components/BreedList';
-import BreedDetails from './src/presentation/components/BreedDetails';
+import BreedList from './src/view/components/BreedList';
+import BreedDetails from './src/view/components/BreedDetails';
 import { View, Text, Image } from 'react-native';
 
 const Stack = createStackNavigator();
