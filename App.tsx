@@ -1,20 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import BreedList from './src/presentation/components/BreedList';
+import BreedDetails from './src/presentation/components/BreedDetails';
+import { View, Text, Image } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const HomeStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="BreedList"
+      component={BreedList}
+      options={{
+        title: 'Breed List',
+        headerTitleStyle: { color: 'white' },
+        headerStyle: { backgroundColor: '#8c6239' },
+      }}
+    />
+    <Stack.Screen
+      name="BreedDetails"
+      component={BreedDetails}
+      options={{
+        title: 'Breed Details',
+        headerTitleStyle: { color: 'white' },
+        headerStyle: { backgroundColor: '#8c6239' },
+        headerBackTitleVisible: false,
+        headerBackImage: () => (
+          <Image
+            source={require(`./assets/back.png`)}
+            style={{
+              width: 20,
+              height: 20,
+              tintColor: 'white',
+              marginLeft: 20,
+            }}
+          />
+        ),
+      }}
+    />
+  </Stack.Navigator>
+);
+
+const SettingsScreen = () => (
+  <View>
+    <Text></Text>
+  </View>
+);
+
+const App = () => (
+  <NavigationContainer>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{ headerShown: false, tabBarActiveTintColor: '#8c6239' }}
+      />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  </NavigationContainer>
+);
+
+export default App;
